@@ -2062,7 +2062,7 @@ def _cumulative_reduction(
     if dtypes.issubdtype(result_type, np.bool_):
       result_type = _promote_integer_dtype(result_type)
 
-  if a_type != np.bool_ and dtype == np.bool_:
+  if a_type != np.bool_ and dtype is not None and np.dtype(dtype) == np.dtype(bool):
     a = lax.asarray(a).astype(np.bool_)
 
   a = lax.convert_element_type(a, result_type)
